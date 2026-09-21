@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transform, Transition & Animation (Simple)</title>
+    <style>
+        /* Base Setup: Sirf font aur boxes ko alag rakhne ke liye margin */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        h2 {
+            margin-top: 40px;
+            color: #2c3e50;
+        }
+
+        /* Sab boxes ka ek jaisa basic design */
+        .box {
+            width: 100px;
+            height: 100px;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        /* ==========================================
+           1. TRANSFORM SECTION
+           ========================================== */
+        .bg-transform { 
+            background-color: #3498db; /* Blue */
+        }
+        /* Hover karne par box direct scale aur rotate hojayega */
+        .box-transform:hover {
+            transform: scale(1.2) rotate(20deg);
+        }
+
+        /* ==========================================
+           2. TRANSITION SECTION
+           ========================================== */
+        .bg-transition { 
+            background-color: #e67e22; /* Orange */
+            /* Jab background ya shape change ho, to wo 0.5s me smoothly ho */
+            transition: background-color 0.5s ease, border-radius 0.5s ease;
+        }
+        /* Hover karne par color aur shape smoothly badlegi */
+        .box-transition:hover {
+            background-color: #d35400;
+            border-radius: 50%;
+        }
+
+        /* ==========================================
+           3. ANIMATION SECTION
+           ========================================== */
+        .bg-animation { 
+            background-color: #2ecc71; /* Green */
+            position: relative;        /* Moving left/right ke liye zaroori hai */
+            
+            /* animation: name | duration | timing | iteration */
+            animation: shift-and-morph 4s ease-in-out infinite;
+        }
+
+        /* Animation Timeline: Left se Right jana, color/shape badalna aur wapas aana */
+        @keyframes shift-and-morph {
+            0%, 10% {
+                left: 0px;
+                background-color: #2ecc71;
+                border-radius: 8px;
+            }
+            45%, 55% {
+                left: 300px;
+                background-color: #9b59b6;
+                border-radius: 50%;
+            }
+            90%, 100% {
+                left: 0px;
+                background-color: #2ecc71;
+                border-radius: 8px;
+            }
+        }
+
+        /* ==========================================
+           4. HOVER TO INFINITE ROTATE IMAGE SECTION
+           ========================================== */
+        .image-box {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;       /* Box ko perfect circle banane ke liye */
+            overflow: hidden;         /* Image agar badi ho to circle se bahar na nikle */
+            border: 3px solid #34495e;
+            display: inline-block;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;        /* Image ko stretch hone se bachata hai */
+        }
+
+        /* Jab .image-box par hover hoga, to andar wali img par animation chalegi */
+        .image-box:hover img {
+            /* --- SPEED CONTROL COMMENT ---
+               Yahan '0.5s' ka matlab hai ke image 0.5 second me poora 360 degree ghumegi.
+               Agar speed aur tez karni ho to '0.2s' kar dein, aur agar slow karni ho to '1s' ya '2s' kar dein.
+            */
+            animation: spin-non-stop 0.5s linear 0s infinite; /* <-- Yahan 0.5s lagane se speed tez hui hai */
+        }
+
+        /* Non-stop 360 degree ghumane ke liye timeline */
+        @keyframes spin-non-stop {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>1. CSS Transform (Hover me to Rotate/Scale instantly)</h2>
+    <div class="box bg-transform box-transform">Transform</div>
+
+    <h2>2. CSS Transition (Hover me to see Smooth Color/Shape Change)</h2>
+    <div class="box bg-transition box-transition">Transition</div>
+
+    <h2>3. CSS Animation (Auto Moving, Changing & Returning Loop)</h2>
+    <div class="box bg-animation">Animation</div>
+
+    <h2>4. Hover Image Rotation (Hover me to Spin Non-Stop)</h2>
+    <div class="image-box">
+        <img src="https://static.vecteezy.com/system/resources/previews/014/020/188/original/refresh-button-icon-png.png" alt="MY IMG">
+    </div>
+
+</body>
+</html>
